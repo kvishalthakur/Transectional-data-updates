@@ -1,19 +1,96 @@
-plugins {
-	id 'org.springframework.boot' version '2.1.2.RELEASE'
-	id 'java'
+buildscript {
+       ext {
+              springBootVersion = '1.5.6.RELEASE'
+       }
+       repositories {
+                      maven {
+                             credentials {
+                             username "$artifactoryUser"
+                            password "$artifactoryUser"
+                    }
+                      url "$artifactoryPullUrl" 
+                     }
+       }
+       dependencies {
+       classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+       classpath("io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE")
+       }
 }
-
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
 
 group = 'com.tdu'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
+	//mavenCentral()
+	mavenLocal()             
+                    maven {
+                             credentials {
+                             username "$artifactoryUser"
+                            password "$artifactoryPassword"
+                    }
+                    url "$artifactoryPullUrl" 
+                    }   
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+    //compile "com.apporchid:ao-jpa:${artifactVersion}"
+    //compile "com.apporchid:ao-security:${artifactVersion}"
+    
+    
+    //compile "com.apporchid:ao-common:${artifactVersion}"
+    //compile "com.apporchid:ao-config:${artifactVersion}"
+    //compile "com.apporchid:ao-crypto:${artifactVersion}"
+    //compile "com.apporchid:ao-core:${artifactVersion}"
+    //compile "com.apporchid:ao-jpa:${artifactVersion}"
+    //compile "com.apporchid:ao-multitenancy:${artifactVersion}"
+    //compile "com.apporchid:ao-license:${artifactVersion}"
+    ///compile "com.apporchid:ao-schedulers:${artifactVersion}"
+    //compile "com.apporchid:ao-security:${artifactVersion}"
+    //compile "com.apporchid:cloudseer-common:${artifactVersion}"
+    ///compile "com.apporchid:cloudseer-jpa:${artifactVersion}"
+    //compile "com.apporchid:cloudseer-pipeline:${artifactVersion}" 
+    //compile "com.apporchid:cloudseer-datasource:${artifactVersion}"     
+    //compile "com.apporchid:agora-analytics:${artifactVersion}"
+    //compile "com.apporchid:ao-elasticsearch:${artifactVersion}"
+    //compile "com.apporchid:vulcanux:${artifactVersion}"
+    
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.6.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.6.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.5.6.RELEASE', ext: 'pom'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '1.5.6.RELEASE'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+	
+	// https://mvnrepository.com/artifact/postgresql/postgresql
+	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+	
+	// https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	
+	//compile "org.springframework.security:spring-security-config:${spring_security_version}"
+    //compile "org.springframework.security:spring-security-data:${spring_security_version}"
+    //compile "org.springframework.security:spring-security-web:${spring_security_version}"
+    //compile "org.springframework.security.oauth:spring-security-oauth2:${spring_security_oauth2_version}"
+		
+	
+	
+	
+    
 }

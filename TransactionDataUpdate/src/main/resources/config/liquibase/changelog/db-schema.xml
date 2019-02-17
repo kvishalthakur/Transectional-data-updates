@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="supported_dbms" value="mysql,h2,postgresql,oracle,mssql"/>
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="now" value="GETDATE()" dbms="mssql"/>
+
+    <property name="autoIncrement" value="true" dbms="${supported_dbms}"/>
+
+    <changeSet id="00000000000000" author="none" dbms="postgresql,oracle">
+        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="1"/>
+    </changeSet>
+	<include file="classpath:config/liquibase/changelog/schema_ao-multitenancy_v2.0.xml"/>
+	<include file="classpath:config/liquibase/changelog/schema_ao-security_v2.0.xml"/>
+    <include file="classpath:config/liquibase/changelog/schema_config_v2.0.xml"/>
+    <include file="classpath:config/liquibase/changelog/schema_ao-jpa_v2.0.xml"/>
+    <include file="classpath:config/liquibase/changelog/schema_ao-license_v2.0.xml"/>
+    <include file="classpath:config/liquibase/changelog/schema_ao-scheduler_v2.0.xml"/>
+    <!-- <include file="classpath:config/liquibase/changelog/schema_cloud-seer_v2.0.xml"/>-->
+</databaseChangeLog>

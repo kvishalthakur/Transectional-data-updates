@@ -1,0 +1,72 @@
+spring:
+    application:
+          name: TransactionDataUpdate
+    datasource:
+        #type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://awsnlcld001.amwaternp.net:5432/ao-aw-cloudseer3
+        #name:
+        #hikari:
+          #minimum-idle: 2
+        username: postgres
+        password: vjedqz)D6kd
+
+tdu:
+  sql:
+    save-transaction-data: INSERT INTO txn_data.dmtbl(dmid, dmdate) VALUES (?,?); 
+
+
+ao-platform: 
+    security: 
+      openid-enabled: false
+      oauth-enabled: true  
+      identity-mgmt:  
+        # Indicates supported authentication type (database, ldap, hybrid, custom etc.)
+        auth-type: database 
+        database:
+         provider-configurer: com.apporchid.security.provider.db.DatabaseAuthProviderConfigurer
+        hybrid: 
+          provider-configurer: com.apporchid.security.provider.hybrid.HybridAuthProviderConfigurer
+        custom: 
+          provider-configurer: com.apporchid.security.provider.custom.CustomAuthProviderConfigurer
+          
+      secured-resource-uris: /api/.*,/tenant/**,/cueCards/**,/meters/**,/meter/**
+      permitted-resource-uris: /api/authenticate,/api/is_authenticated,/api/register,/v2/api-docs/**,/swagger-resources/configuration/ui,/swagger-resources/configuration/ui,/swagger-ui/index.html,/apps/**/*.{js,html},/bower_components/**,/i18n/**,/content/**,/**/*.{js,html},/customers/createNotification,/customers/notification
+      login-uri: /
+      logout-uri: /logout
+      cors: 
+          allowed-origins: "*"
+          allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+          allowed-headers: "*"
+          exposed-headers:
+          allow-credentials: true
+          max-age: 1800 
+          cors-request-pattern: /**           
+      http:
+        secure-cookie: true
+      openid-connect: 
+        client-id: '444bb1ac72da425eaa9925fac1533047'
+        client-secret: 'ce91af68003ca1c1ccbcca59f8f9950a248e08c5c930ea3aecf68534a6d314e4'
+        auth-uri: https://sa-dev.amwater.com/secureauth95
+        token-uri: https://sa-dev.amwater.com/secureauth95/oidctoken.aspx
+        userinfo-uri: https://sa-dev.amwater.com/secureauth95/oidcuserinfo.aspx
+        redirect-uri: https://meteropscs.amwaternp.net/openidlogin    //todo
+        scopes: email, profile 
+        token-cookie-name: ao_login_token 
+        on-success-redirect-url: https://meteropscs.amwaternp.net/app/login/home.html //todo
+        entrypoint-url: /openidlogin
+        logout-url: /logout.html 
+        group_claim_name: GroupMembership
+        domain-name:
+        cookie-max-age: 180    
+
+      swagger:
+        title: ${spring.application.name}
+        description: ${spring.application.name} API documentation
+        version: 2.9.2
+        terms-of-service-url:
+        contact-name:
+        contact-url:
+        contact-email:
+        license:
+        license-url:
+        default-include-pattern: /api/.*
