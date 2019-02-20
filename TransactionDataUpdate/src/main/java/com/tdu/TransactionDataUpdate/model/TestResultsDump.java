@@ -1,6 +1,6 @@
 package com.tdu.TransactionDataUpdate.model;
 
-public class TestResults {
+public class TestResultsDump {
 
 	private String registerId;
 	private String lowMedHighIndicator;

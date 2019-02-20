@@ -18,8 +18,6 @@ public class Completion {
 		this.notes = notes;
 	}
 
-	private List<Activities> activities;
-	
 	private String additionalWorkNeeded;
 	private String purpose;
 	private String technicalInspectedOn;
@@ -51,8 +49,16 @@ public class Completion {
 	private String activityReason;
 	private String rating;
 	private String qualityIssue;
-	private List<TestResults> testResults;
+	private List<Activities> activities;	
 	
+	public List<Activities> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activities> activities) {
+		this.activities = activities;
+	}
+
 	public String getQualityIssue() {
 		return qualityIssue;
 	}
@@ -91,14 +97,6 @@ public class Completion {
 
 	public void setCompletionStatus(String completionStatus) {
 		this.completionStatus = completionStatus;
-	}
-
-	public List<Activities> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(List<Activities> activities) {
-		this.activities = activities;
 	}
 
 	public String getAdditionalWorkNeeded() {
@@ -323,16 +321,5 @@ public class Completion {
 
 	public void setRating(String rating) {
 		this.rating = rating;
-	}
-
-	public List<TestResults> getTestResults() {
-		return testResults;
-	}
-
-	public void setTestResults(List<TestResults> testResults) {
-		this.testResults = testResults;
-	}
-	
-	
-	
+	}	
 }
